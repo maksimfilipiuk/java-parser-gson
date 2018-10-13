@@ -19,10 +19,24 @@
  */
 
 import com.google.gson.*;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 public class Main {
 
-    public static void main(String[] args) {
-        // Code...
+    public static void main(String[] args) throws Exception {
+
+        URL url = new URL("https://freegeoip.app/json/");
+        InputStreamReader reader = new InputStreamReader(url.openStream());
+        Result result = new Gson().fromJson(reader, Result.class);
+        System.out.println(
+                "IP: " + result.ip +
+                "\nCountry code: " + result.country_code +
+                "\nCountry name: " + result.country_name +
+                "\nCity: " + result.city +
+                "\nRegion code: " + result.region_code +
+                "\nRegion name: " + result.region_name +
+                "\nZIP Code: " + result.zip_code
+        );
     }
 }
